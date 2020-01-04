@@ -19,6 +19,12 @@ class CreateBooksTable extends Migration
             $table->string('name'); // Book name
             $table->date('release_date'); // Book release date
             $table->timestamps();
+
+            $table->foreign('author_id')
+                ->references('id')
+                ->on('authors')
+                ->onDelete('cascade'); // when any author row deleted, delete all associated books.
+
         });
     }
 

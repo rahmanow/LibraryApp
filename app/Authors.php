@@ -8,6 +8,6 @@ class Authors extends Model
 {
     public function books()
     {
-        return $this->hasMany(Books::class);
+        return $this->hasMany(Books::class, 'author_id'); // assign foreign key id. (default is authors_id)
     }
 }
