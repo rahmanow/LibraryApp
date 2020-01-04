@@ -12,10 +12,10 @@
                 @csrf
                 <div class="row pb-2">
                     <div class="col">
-                        <input type="text" class="form-control {{ $errors->has('aname') ? 'is-invalid' : ''}}" name="aname" placeholder="Author name" required>
+                        <input type="text" class="form-control {{ $errors->has('author_name') ? 'is-invalid' : ''}}" name="author_name" placeholder="Author name" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control {{ $errors->has('bname') ? 'is-invalid' : ''}}" name="bname" placeholder="Book name" required>
+                        <input type="text" class="form-control {{ $errors->has('book_name') ? 'is-invalid' : ''}}" name="book_name" placeholder="Book name">
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                         <input type="number" class="form-control {{ $errors->has('age') ? 'is-invalid' : ''}}" name="age" placeholder="Author age" required>
                     </div>
                     <div class="col">
-                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" name="release_date" placeholder="Release date" required>
+                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" name="release_date" placeholder="Release date">
                     </div>
                 </div>
 
@@ -68,8 +68,8 @@
 
                         @foreach($books as $book)
                         <tr>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->name }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->name }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->author_name }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->book_name }}</td>
                             <td class="body-item mbr-fonts-style display-7">{{ $book->author->age }}</td>
                             <td class="body-item mbr-fonts-style display-7">{{ $book->author->address }}</td>
                             <td class="body-item mbr-fonts-style display-7">{{ $book->release_date }}</td>

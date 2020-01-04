@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Authors;
 use App\Books;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -36,26 +37,27 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'release_date' => 'required',
-            'age' => 'required',
-            'address' => 'required'
-        ]);
+        $data = $request->all();
+        $getAuthor = DB::table('authors')->where('author_name', $data['author_name'])->first();
+        if(!$getAuthor) {
+            $author = new Authors;
+            $author->author_name = $data['author_name'];
+            $author->age = $data['age'];
+            $author->address = $data['address'];
+            $author->save();
 
-        //dump(request()->all());
-        $book = new Books();
-        $author = new Authors();
-
-        $book->name = request('bname');
-        $book->release_date = request('release_date');
-
-        $author->name = request('aname');
-        $author->age = request('age');
-        $author->address = request('address');
-
-        $book->save();
-        $author->save();
+            $book = new Books;
+            $book->author_id = $author->id;
+            $book->book_name = $data['book_name'];
+            $book->release_date = $data['release_date'];
+            $book->save();
+        } else {
+            $book = new Books;
+            $book->author_id = $getAuthor->id;
+            $book->book_name = $data['book_name'];
+            $book->release_date = $data['release_date'];
+            $book->save();
+        }
 
         return redirect('/');
 
