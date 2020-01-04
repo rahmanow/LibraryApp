@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Authors;
 use App\Books;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,29 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'release_date' => 'required',
+            'age' => 'required',
+            'address' => 'required'
+        ]);
+
+        //dump(request()->all());
+        $book = new Books();
+        $author = new Authors();
+
+        $book->name = request('bname');
+        $book->release_date = request('release_date');
+
+        $author->name = request('aname');
+        $author->age = request('age');
+        $author->address = request('address');
+
+        $book->save();
+        $author->save();
+
+        return redirect('/');
+
     }
 
     /**

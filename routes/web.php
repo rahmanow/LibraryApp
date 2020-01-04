@@ -19,6 +19,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::post('/', 'BooksController@store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

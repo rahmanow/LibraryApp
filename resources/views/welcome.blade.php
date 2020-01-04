@@ -8,6 +8,34 @@
             <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
                 Simple Library App with Laravel
             </h2>
+            <form method="POST" action="/">
+                @csrf
+                <div class="row pb-2">
+                    <div class="col">
+                        <input type="text" class="form-control {{ $errors->has('aname') ? 'is-invalid' : ''}}" name="aname" placeholder="Author name" required>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control {{ $errors->has('bname') ? 'is-invalid' : ''}}" name="bname" placeholder="Book name" required>
+                    </div>
+                </div>
+
+                <div class="row pb-2">
+                    <div class="col">
+                        <input type="number" class="form-control {{ $errors->has('age') ? 'is-invalid' : ''}}" name="age" placeholder="Author age" required>
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" name="release_date" placeholder="Release date" required>
+                    </div>
+                </div>
+
+                <div class="row pb-2">
+                     <div class="col">
+                         <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : ''}}" name="address" placeholder="Author Address">
+                     </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
             <div class="table-wrapper">
                 <div class="container">
                     <div class="row search">
