@@ -11,6 +11,6 @@ class BooksSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Authors::all()->each(function($author){ factory('App\Books', 3)->create(['author_id' => $author->id]);});
     }
 }

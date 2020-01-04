@@ -11,6 +11,6 @@ class AuthorsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $authors=factory(App\Authors::class, 10)->create();
     }
 }

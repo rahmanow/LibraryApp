@@ -15,7 +15,7 @@
                         <input type="text" class="form-control {{ $errors->has('author_name') ? 'is-invalid' : ''}}" name="author_name" placeholder="Author name" required>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control {{ $errors->has('book_name') ? 'is-invalid' : ''}}" name="book_name" placeholder="Book name">
+                        <input type="text" class="form-control {{ $errors->has('book_name') ? 'is-invalid' : ''}}" name="book_name" placeholder="Book name" required>
                     </div>
                 </div>
 
@@ -24,13 +24,13 @@
                         <input type="number" class="form-control {{ $errors->has('age') ? 'is-invalid' : ''}}" name="age" placeholder="Author age" required>
                     </div>
                     <div class="col">
-                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" name="release_date" placeholder="Release date">
+                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" name="release_date" placeholder="Release date" required>
                     </div>
                 </div>
 
                 <div class="row pb-2">
                      <div class="col">
-                         <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : ''}}" name="address" placeholder="Author Address">
+                         <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : ''}}" name="address" placeholder="Author Address" required>
                      </div>
                 </div>
 
@@ -66,13 +66,13 @@
 
                         <tbody>
 
-                        @foreach($books as $book)
+                        @foreach($books as $library)
                         <tr>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->author_name }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->book_name }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->age }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->address }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $book->release_date }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $library->author->author_name }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $library->book_name }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $library->author->age }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $library->author->address }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $library->release_date }}</td>
                         </tr>
                         @endforeach
                         </tbody>
