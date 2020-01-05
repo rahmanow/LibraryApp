@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html  >
 <head>
-    <!-- Site made with Mobirise Website Builder v4.11.6, https://mobirise.com -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -21,7 +20,6 @@
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 </head>
 <body>
-@extends('topmenu')
 
 @yield('content')
 
@@ -39,6 +37,7 @@
 <script src="assets/datatables/data-tables.bootstrap4.min.js"></script>
 <script src="assets/mbr-tabs/mbr-tabs.js"></script>
 <script src="assets/theme/js/script.js"></script>
+
 
 </body>
 </html>

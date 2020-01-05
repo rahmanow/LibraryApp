@@ -1,4 +1,4 @@
-@extends('layout');
+@extends('layout')
 
 @section('content')
 
@@ -8,34 +8,63 @@
             <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
                 Simple Library App with Laravel
             </h2>
+
             <form method="POST" action="/">
                 @csrf
+
                 <div class="row pb-2">
-                    <div class="col">
-                        <input type="text" class="form-control {{ $errors->has('author_name') ? 'is-invalid' : ''}}" name="author_name" placeholder="Author name" required>
+                    <div class="col form-group">
+                        <label for="author_name">Author name</label>
+                        <input type="text" class="form-control {{ $errors->has('author_name') ? 'is-invalid' : ''}}" value="{{ Request::old('author_name')}}" name="author_name" placeholder="Write author name" required>
+                        @if ($errors->has('author_name'))
+                            <div class="invalid-feedback">{{ $errors->first('author_name') }}</div>
+                        @endif
+
                     </div>
-                    <div class="col">
-                        <input type="text" class="form-control {{ $errors->has('book_name') ? 'is-invalid' : ''}}" name="book_name" placeholder="Book name" required>
+                    <div class="col form-group">
+                        <label for="book_name">Book name</label>
+                        <input type="text" class="form-control {{ $errors->has('book_name') ? 'is-invalid' : ''}}" value="{{ Request::old('book_name')}}" name="book_name" placeholder="Write book name" required>
+                        @if ($errors->has('book_name'))
+                            <span class="invalid-feedback">{{ $errors->first('book_name') }}</span>
+                        @endif
                     </div>
                 </div>
 
                 <div class="row pb-2">
-                    <div class="col">
-                        <input type="number" class="form-control {{ $errors->has('age') ? 'is-invalid' : ''}}" name="age" placeholder="Author age" required>
+                    <div class="col form-group">
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control {{ $errors->has('age') ? 'is-invalid' : ''}}" name="age" value="{{ Request::old('age')}}" placeholder="Write author age" required>
+                        @if ($errors->has('age'))
+                            <span class="invalid-feedback">{{ $errors->first('age') }}</span>
+                        @endif
                     </div>
-                    <div class="col">
-                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" name="release_date" placeholder="Release date" required>
+                    <div class="col form-group">
+                        <label for="release_date">Release date</label>
+                        <input type="date" class="form-control {{ $errors->has('release_date') ? 'is-invalid' : ''}}" value="{{ Request::old('release_date')}}" name="release_date" placeholder="Release date" required>
+                        @if ($errors->has('release_date'))
+                            <span class="invalid-feedback">{{ $errors->first('release_date') }}</span>
+                        @endif
                     </div>
                 </div>
 
-                <div class="row pb-2">
-                     <div class="col">
-                         <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : ''}}" name="address" placeholder="Author Address" required>
+                <div class="row pb-2 form-group">
+                     <div class="col form-group">
+                         <label for="address">Address</label>
+                         <input type="text" class="form-control {{ $errors->has('address') ? 'is-invalid' : ''}}" value="{{ Request::old('address')}}" name="address" placeholder="Write author address" required>
+                         @if ($errors->has('address'))
+                             <span class="invalid-feedback">{{ $errors->first('address') }}</span>
+                         @endif
                      </div>
                 </div>
-
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
+
+
             <div class="table-wrapper">
                 <div class="container">
                     <div class="row search">

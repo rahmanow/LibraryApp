@@ -37,6 +37,14 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'author_name' => 'required',
+            'book_name' => 'required',
+            'age' => 'required',
+            'release_date' => 'required',
+            'address' => 'required'
+        ]);
+
         $data = $request->all();
         $getAuthor = DB::table('authors')->where('author_name', $data['author_name'])->first();
         if(!$getAuthor) {
@@ -59,7 +67,7 @@ class BooksController extends Controller
             $book->save();
         }
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Your book has been successfully added!');
 
     }
 
