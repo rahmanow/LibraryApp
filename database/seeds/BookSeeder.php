@@ -1,5 +1,5 @@
 <?php
-
+use App\Author;
 use Illuminate\Database\Seeder;
 
 class BookSeeder extends Seeder
@@ -12,6 +12,8 @@ class BookSeeder extends Seeder
     public function run()
     {
         // seed 3 rows of random data for each author
-        \App\Author::all()->each(function($author){ factory('App\Book', 3)->create(['author_id' => $author->id]);});
+        Author::all()->each(function($author){
+            factory('App\Book', 3)->create(['author_id' => $author->id]);
+        });
     }
 }

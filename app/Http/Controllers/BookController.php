@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -37,41 +36,32 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $data           = $request->all();
+
+        $authorName     = $data['author_name'];
+        $authorAge      = $data['age'];
+        $authorAddress  = $data['address'];
+        $bookName       = $data['book_name'];
+        $releaseDate    = $data['release_date'];
+        $id             = (new AuthorController)->getRequestedAuthorID($authorName, $authorAge, $authorAddress, (new Author)->matchAuthor($authorName, $authorAge));
+
         $request->validate([
-            'author_name' => 'required | string | max:255',
-            'book_name' => 'required | string | max:255',
-            'age' => 'required | integer | min:10',
-            'release_date' => 'required | before:tomorrow',
-            'address' => 'required | string | max:255'
+            'author_name'   => 'required | string | max:255',
+            'age'           => 'required | integer | min:10',
+            'address'       => 'required | string | max:255',
+            'book_name'     => 'required | string | max:255',
+            'release_date'  => 'required | beforeOrEqual:today'
         ]);
 
-        $data = $request->all();
 
-        $similarAuthorName = DB::table('authors')->where('author_name', $data['author_name'])->get();
-        $authorAgeMatch = $similarAuthorName->where('age', $data['age'])->first();
+        Book::create([
+                'author_id'     => $id,
+                'book_name'     => $bookName,
+                'release_date'  => $releaseDate
+            ]);
 
-        if(!$authorAgeMatch) {
-            $author = new Author;
-            $author->author_name = $data['author_name'];
-            $author->age = $data['age'];
-            $author->address = $data['address'];
-            $author->save();
-
-            $book = new Book;
-            $book->author_id = $author->id;
-            $book->book_name = $data['book_name'];
-            $book->release_date = $data['release_date'];
-            $book->save();
-        } else {
-            $book = new Book;
-            $book->author_id = $authorAgeMatch->id;
-            $book->book_name = $data['book_name'];
-            $book->release_date = $data['release_date'];
-            $book->save();
-        }
-
-        return redirect('/')->with('success', 'Your book has been successfully added!');
-
+        return redirect('/')
+            ->with('success', 'Your book has been successfully added!');
     }
 
     /**
@@ -118,4 +108,5 @@ class BookController extends Controller
     {
         //
     }
+
 }

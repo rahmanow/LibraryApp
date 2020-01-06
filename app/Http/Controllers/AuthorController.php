@@ -82,4 +82,18 @@ class AuthorController extends Controller
     {
         //
     }
+
+    //
+    public function getRequestedAuthorID ($name, $age, $address, $matched)
+    {
+        if(!$matched) {
+            return Author::create([
+                'author_name'   => $name,
+                'age'           => $age,
+                'address'       => $address
+            ])->id;
+        } else {
+            return $matched->id;
+        }
+    }
 }
