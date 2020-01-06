@@ -14,13 +14,8 @@
 Route::get('/', function () {
 
     return view('welcome', [
-        'books' => App\Books::all()
-
+        'books' => App\Book::all()
     ]);
 });
 
-Route::post('/', 'BooksController@store');
-
-//Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/', 'BookController@store');

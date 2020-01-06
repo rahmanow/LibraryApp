@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Authors;
-use App\Books;
+use App\Author;
+use App\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BooksController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,35 +33,38 @@ class BooksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $request->validate([
-            'author_name' => 'required',
-            'book_name' => 'required',
-            'age' => 'required',
-            'release_date' => 'required',
-            'address' => 'required'
+            'author_name' => 'required | string | max:255',
+            'book_name' => 'required | string | max:255',
+            'age' => 'required | integer | min:10',
+            'release_date' => 'required | before:tomorrow',
+            'address' => 'required | string | max:255'
         ]);
 
         $data = $request->all();
-        $getAuthor = DB::table('authors')->where('author_name', $data['author_name'])->first();
-        if(!$getAuthor) {
-            $author = new Authors;
+
+        $similarAuthorName = DB::table('authors')->where('author_name', $data['author_name'])->get();
+        $authorAgeMatch = $similarAuthorName->where('age', $data['age'])->first();
+
+        if(!$authorAgeMatch) {
+            $author = new Author;
             $author->author_name = $data['author_name'];
             $author->age = $data['age'];
             $author->address = $data['address'];
             $author->save();
 
-            $book = new Books;
+            $book = new Book;
             $book->author_id = $author->id;
             $book->book_name = $data['book_name'];
             $book->release_date = $data['release_date'];
             $book->save();
         } else {
-            $book = new Books;
-            $book->author_id = $getAuthor->id;
+            $book = new Book;
+            $book->author_id = $authorAgeMatch->id;
             $book->book_name = $data['book_name'];
             $book->release_date = $data['release_date'];
             $book->save();
@@ -74,10 +77,10 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Books  $books
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Books $books)
+    public function show(Book $book)
     {
         //
     }
@@ -85,10 +88,10 @@ class BooksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Books  $books
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Books $books)
+    public function edit(Book $book)
     {
         //
     }
@@ -97,10 +100,10 @@ class BooksController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Books  $books
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Books $books)
+    public function update(Request $request, Book $book)
     {
         //
     }
@@ -108,10 +111,10 @@ class BooksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Books  $books
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Books $books)
+    public function destroy(Book $book)
     {
         //
     }

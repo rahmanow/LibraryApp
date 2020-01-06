@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Authors;
+use App\Author;
 use Illuminate\Http\Request;
 
-class AuthorsController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class AuthorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Authors  $authors
+     * @param  \App\Author  $authors
      * @return \Illuminate\Http\Response
      */
-    public function show(Authors $authors)
+    public function show(Author $authors)
     {
         //
     }
@@ -52,10 +52,10 @@ class AuthorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Authors  $authors
+     * @param  \App\Author  $authors
      * @return \Illuminate\Http\Response
      */
-    public function edit(Authors $authors)
+    public function edit(Author $authors)
     {
         //
     }
@@ -64,10 +64,10 @@ class AuthorsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Authors  $authors
+     * @param  \App\Author  $authors
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Authors $authors)
+    public function update(Request $request, Author $authors)
     {
         //
     }
@@ -75,10 +75,10 @@ class AuthorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Authors  $authors
+     * @param  \App\Author  $authors
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Authors $authors)
+    public function destroy(Author $authors)
     {
         //
     }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AuthorsSeeder extends Seeder
+class AuthorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class AuthorsSeeder extends Seeder
      */
     public function run()
     {
-        $authors=factory(App\Authors::class, 10)->create();
+        // seed 10 rows of random data
+        return factory(App\Author::class, 10)->create();
     }
 }
