@@ -14,7 +14,7 @@
 Route::get('/', function () {
 
     return view('welcome', [
-        'books' => App\Book::all()
+        'library' => App\Book::all()
     ]);
 });
 

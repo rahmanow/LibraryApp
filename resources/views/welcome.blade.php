@@ -96,13 +96,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($books as $library)
+                        @foreach($library as $book)
                         <tr>
-                            <td class="body-item mbr-fonts-style display-7">{{ $library->author->author_name }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $library->book_name }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $library->author->age }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $library->author->address }}</td>
-                            <td class="body-item mbr-fonts-style display-7">{{ $library->release_date }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->author_name }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->book_name }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->age }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->author->address }}</td>
+                            <td class="body-item mbr-fonts-style display-7">{{ $book->release_date }}</td>
                         </tr>
                         @endforeach
                         </tbody>

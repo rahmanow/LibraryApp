@@ -36,16 +36,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $data           = $request->all();
-
-        $authorName     = $data['author_name'];
-        $authorAge      = $data['age'];
-        $authorAddress  = $data['address'];
-        $bookName       = $data['book_name'];
-        $releaseDate    = $data['release_date'];
-        $id             = (new AuthorController)->getRequestedAuthorID($authorName, $authorAge, $authorAddress, (new Author)->matchAuthor($authorName, $authorAge));
-
-        $request->validate([
+        $data = $request->validate([
             'author_name'   => 'required | string | max:255',
             'age'           => 'required | integer | min:10',
             'address'       => 'required | string | max:255',
@@ -53,15 +44,16 @@ class BookController extends Controller
             'release_date'  => 'required | beforeOrEqual:today'
         ]);
 
+        $id = (new AuthorController)->getRequestedAuthorID($data['author_name'], $data['age'], $data['address'],
+            (new Author)->matchAuthor($data['author_name'], $data['age']));
 
         Book::create([
                 'author_id'     => $id,
-                'book_name'     => $bookName,
-                'release_date'  => $releaseDate
+                'book_name'     => $data['book_name'],
+                'release_date'  => $data['release_date']
             ]);
 
-        return redirect('/')
-            ->with('success', 'Your book has been successfully added!');
+        return redirect('/')->with('success', 'Your book has been successfully added!');
     }
 
     /**
